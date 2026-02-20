@@ -15,6 +15,8 @@ OR upload it directly to Google Colab to view and run it.
 📥 Notebook file:
 `Text_Summarizer_Using_BART_Transformer.ipynb`
 
+Colab notebook link: https://colab.research.google.com/drive/1m_Q9BN-cSY718xt2G9AF9yeNM-qAmeqR
+
 ## Project Overview
 
 BART is a sequence-to-sequence transformer model designed for natural language generation tasks like:
