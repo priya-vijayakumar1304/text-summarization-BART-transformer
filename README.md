@@ -8,6 +8,13 @@ The objective is to compare:
 
 ✅ Fine-tuned BART model on summarization dataset
 
+
+⚠️ Note: If the notebook preview does not load on GitHub, download the file and open it locally in Jupyter Notebook
+OR upload it directly to Google Colab to view and run it.
+
+📥 Notebook file:
+Text_Summarizer_Using_BART_Transformer.ipynb
+
 ## Project Overview
 
 BART is a sequence-to-sequence transformer model designed for natural language generation tasks like:
