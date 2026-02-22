@@ -1,76 +1,132 @@
-# Text Summarization using BART Transformer
+# 📝 Dialogue Summarization using BART (Supervised Fine-Tuning)
 
-This project explores abstractive text summarization using the BART (Bidirectional and Auto-Regressive Transformer) model from Hugging Face Transformers.
+This project implements **abstractive dialogue summarization** using a pre-trained BART transformer model and applies **Supervised Fine-Tuning (SFT)** on the DialogSum dataset.
 
-The objective is to compare:
+The objective is to compare baseline summarization performance with a task-adapted fine-tuned model.
 
-✅ Pre-trained BART model (without fine-tuning)
+📓 Notebook: `Text_Summarizer_Using_BART_Transformer.ipynb`
 
-✅ Fine-tuned BART model on summarization dataset
+> ⚠️ If the notebook preview does not load on GitHub, download the file and open it locally in Jupyter Notebook, or use the Google Colab link below.
 
+**Colab Link:**  
+https://colab.research.google.com/drive/1m_Q9BN-cSY718xt2G9AF9yeNM-qAmeqR
 
-⚠️ Note: If the notebook preview does not load on GitHub, download the file and open it locally in Jupyter Notebook
-OR click on the below link to view in Google Colab and copy it to your drive to run it.
+---
 
-Colab notebook link: https://colab.research.google.com/drive/1m_Q9BN-cSY718xt2G9AF9yeNM-qAmeqR
+## 🚀 Project Objective
 
-## Project Overview
+- Evaluate baseline performance of a pre-trained BART summarization model  
+- Apply supervised fine-tuning (SFT) on dialogue–summary pairs  
+- Measure performance using ROUGE metrics  
+- Analyze qualitative differences between baseline and fine-tuned outputs  
 
-BART is a sequence-to-sequence transformer model designed for natural language generation tasks like:
+---
 
-- Text summarization
-- Question answering
-- Text generation
-- Translation
+## 🤖 Model Used
 
-In this project, we:
+**BART (Bidirectional and Auto-Regressive Transformer)**  
+Model: `facebook/bart-large-cnn`  
+https://huggingface.co/facebook/bart-large-cnn  
 
-- Load a pre-trained BART model
-- Generate summaries without fine-tuning
-- Fine-tune the model on a summarization dataset
-- Compare output quality
+BART is a sequence-to-sequence transformer combining:
+- A bidirectional encoder (BERT-style)
+- An autoregressive decoder (GPT-style)
 
-## Model & Dataset
+It is well-suited for abstractive summarization tasks.
 
-### Pre-trained Model
+---
 
-**BART Large CNN**  
-- Link: https://huggingface.co/facebook/bart-large-cnn  
-- Optimized for abstractive summarization tasks  
-
-### Dataset Used for Fine-Tuning
+## 📊 Dataset
 
 **DialogSum Dataset**  
-- Link: https://huggingface.co/datasets/knkarthick/dialogsum  
-- Contains human-annotated dialogue-summary pairs  
-- Used for training and evaluation 
+https://huggingface.co/datasets/knkarthick/dialogsum  
 
-## Tech Stack
+- Contains human-annotated dialogue–summary pairs  
+- Designed specifically for dialogue summarization  
+- Used for training and evaluation  
 
-- Python
-- Hugging Face Transformers
-- PyTorch
-- Google Colab
+---
 
-## Results
+## 🔧 Fine-Tuning Approach
 
-The fine-tuned BART model generates:
+This project uses **Supervised Fine-Tuning (SFT)**.
 
-- More context-aware summaries
-- Better domain adaptation (if trained on specific dataset)
-- Improved coherence compared to base model
+- Input: Dialogue text  
+- Target: Human-written summary  
+- Loss Function: Cross-entropy loss  
+- Training Method: End-to-end parameter updates using Hugging Face Trainer  
 
-## Key Learnings
+All model parameters are updated to adapt the pre-trained BART model to dialogue summarization.
 
-- Understanding encoder-decoder transformer architecture
-- Working with Hugging Face Trainer API
-- Fine-tuning large language models
-- Text preprocessing and tokenization
+---
 
-## Future Improvements
+## 📈 Evaluation
 
-- Add ROUGE score evaluation
-- Deploy as API using FastAPI
-- Add Streamlit demo app
-- Experiment with other models (T5, PEGASUS)
+Model performance is evaluated using **ROUGE metrics**:
+
+- **ROUGE-1** → Word overlap  
+- **ROUGE-2** → Bigram overlap  
+- **ROUGE-L** → Longest common subsequence similarity  
+
+### ⚠ Resource Constraint Note
+
+During evaluation, full test-set ROUGE computation with `bart-large` exceeded Google Colab memory limits due to:
+
+- Large model size (~400M parameters)
+- Sequence generation memory overhead
+- Dataset loading and prediction storage in RAM
+
+To ensure stable experimentation:
+
+- Evaluation was performed on a representative subset of the test split
+- Memory-aware generation settings were used
+- Model checkpoints were saved separately for reproducibility
+
+This reflects practical constraints when working with large transformer models in limited-resource environments.
+
+---
+
+## 📌 Key Results
+
+The fine-tuned model demonstrates:
+
+- Improved contextual understanding of dialogue flow  
+- Better abstraction compared to the baseline model  
+- More coherent and structured summaries  
+
+---
+
+## 🛠 Tech Stack
+
+- Python  
+- Hugging Face Transformers  
+- PyTorch  
+- Hugging Face Datasets  
+- Google Colab  
+
+---
+
+## 📚 Key Learnings
+
+- Sequence-to-sequence transformer architecture  
+- Supervised fine-tuning workflow  
+- ROUGE-based evaluation for summarization  
+- Memory-aware training and evaluation  
+- Practical constraints of large-model experimentation in limited-resource environments  
+
+---
+
+## 🔮 Future Improvements
+
+- Deploy as a FastAPI service  
+- Add inference latency benchmarking  
+- Perform larger-scale evaluation  
+- Compare BART-base vs BART-large  
+- Experiment with parameter-efficient fine-tuning (LoRA / PEFT)  
+
+---
+
+## 📜 License
+
+This project is for educational and experimentation purposes.
 
